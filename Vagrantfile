@@ -14,26 +14,55 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "centos/7"
 
-  #Virt storage
-  #By arthur
+  #Virt config
   config.vm.provider :libvirt do |libvirt|
       libvirt.storage_pool_name = "images"
       libvirt.memory = 1024
       libvirt.cpus = 1
       libvirt.storage :file, :size => '10G', :format => 'qcow2'
-      
-       #Install docker and enable it
-       #By arthur
-       config.vm.provision :shell, path: "caxias-test/bootstrap.sh" 
- 
+
   end
-  
-  config.vm.network "private_network", ip: "192.168.121.2", nic_type: "virtio"
-  config.vm.provision :shell, path: "caxias-test/network-config.sh"
+
+  #Enabling NFS
   config.vm.synced_folder "./", "/vagrant", :nfs => true
-  #config.vm.synced_folder './', '/vagrant', create: true, type: "nfs", :mount_options => ['nolock,vers=3,tcp,noatime,clientaddr=192.168.121.1'] 
-  
-  #config.vm.synced_folder ".", "/vagrant"
+
+  #Install docker and enable it
+  config.vm.provision :shell, path: "bootstrap.sh" 
+
+  #caxias-manager configs
+  config.vm.define "caxias-manager" do |caxias-manager|
+
+      #Setting hostname
+      caxias-manager.vm.hostname "caxias-manager"
+
+      #Network configing
+      #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
+      #      in the future this will be removed
+      caxias-manager.vm.network "private_network", ip: "192.168.121.2", nic_type: "virtio"
+      caxias-manager.vm.provision :shell, path: "caxias-manager/network-config.sh"
+
+      #VM configing
+      caxias-manager.vm.provision :shell, path: "caxias-manager/bootstrap.sh"
+
+  end
+
+  #macae-worker configs
+  config.vm.define "macae-worker" do |macae-worker|
+
+      #Setting hostname
+      macae-worker.vm.hostname "macae-worker"
+
+      #Network configing
+      #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
+      #      in the future this will be removed
+      macae-worker.vm.network "private_network", ip: "192.168.121.2", nic_type: "virtio"
+      macae-worker.vm.provision :shell, path: "macae-worker/network-config.sh"
+
+      #VM configing
+      macae-worker.vm.provision :shell, path: "macae-worker/bootstrap.sh"
+
+  end
+
 
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
