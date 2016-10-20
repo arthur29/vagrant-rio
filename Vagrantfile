@@ -40,7 +40,7 @@ Vagrant.configure(2) do |config|
       #Network configing
       #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
       #      in the future this will be removed
-      caxias_manager.vm.network :private_network, :ip => "192.168.12.2",:libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster" 
+      caxias_manager.vm.network :private_network, :ip => "192.168.12.2", :libvirt__network_name => "cluster" 
       #caxias_manager.vm.provision :shell, path: "caxias-manager/network-config.sh"
 
 
@@ -58,7 +58,7 @@ Vagrant.configure(2) do |config|
       #Network configing
       #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
       #      in the future this will be removed
-      macae_worker.vm.network :private_network, :ip => "192.168.12.3", :libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster" 
+      macae_worker.vm.network :private_network, :ip => "192.168.12.3", :libvirt__network_name => "cluster" 
       macae_worker.vm.provision :shell, path: "macae-worker/network-config.sh"
 
       #VM configing
@@ -75,7 +75,7 @@ Vagrant.configure(2) do |config|
       #Network configing
       #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
       #      in the future this will be removed
-      campos_worker.vm.network :private_network, :ip => "192.168.12.4", :libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster"
+      campos_worker.vm.network :private_network, :ip => "192.168.12.4", :libvirt__network_name => "cluster"
       campos_worker.vm.provision :shell, path: "campos-worker/network-config.sh"
 
 
