@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-yum update -y
+#yum update -y
 cp /vagrant/docker.repo /etc/yum.repos.d/docker.repo 
 yum install -y docker-engine
 systemctl enable docker

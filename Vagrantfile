@@ -5,6 +5,8 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+Vagrant.require_plugin "vagrant-libvirt"
+
 Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -14,55 +16,73 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "centos/7"
 
-  #Virt config
-  config.vm.provider :libvirt do |libvirt|
-      libvirt.storage_pool_name = "images"
-      libvirt.memory = 1024
-      libvirt.cpus = 1
-      libvirt.storage :file, :size => '10G', :format => 'qcow2'
-
-  end
-
-  #Enabling NFS
-  config.vm.synced_folder "./", "/vagrant", :nfs => true
-
   #Install docker and enable it
   config.vm.provision :shell, path: "bootstrap.sh" 
 
+  #Virt config
+  config.vm.provider :libvirt do |libvirt|
+     libvirt.storage_pool_name = "images"
+     libvirt.memory = 1024
+     libvirt.cpus = 1
+     libvirt.storage :file, :size => '10G', :format => 'qcow2'
+
+     libvirt.management_network_name = "cluster"
+     libvirt.management_network_address = "192.168.12.0/24"
+     libvirt.management_network_mode = "nat"
+ end
+
   #caxias-manager configs
-  config.vm.define "caxias-manager" do |caxias-manager|
+  config.vm.define "caxias-manager", primary: true do |caxias_manager|
 
       #Setting hostname
-      caxias-manager.vm.hostname "caxias-manager"
+      caxias_manager.vm.hostname = "caxias-manager"
 
       #Network configing
       #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
       #      in the future this will be removed
-      caxias-manager.vm.network "private_network", ip: "192.168.121.2", nic_type: "virtio"
-      caxias-manager.vm.provision :shell, path: "caxias-manager/network-config.sh"
+      caxias_manager.vm.network :private_network, :ip => "192.168.12.2",:libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster" 
+      #caxias_manager.vm.provision :shell, path: "caxias-manager/network-config.sh"
+
 
       #VM configing
-      caxias-manager.vm.provision :shell, path: "caxias-manager/bootstrap.sh"
+      caxias_manager.vm.provision :shell, path: "caxias-manager/bootstrap.sh"
 
-  end
+   end
 
-  #macae-worker configs
-  config.vm.define "macae-worker" do |macae-worker|
+   #macae-worker configs
+   config.vm.define "macae-worker" do |macae_worker|
 
       #Setting hostname
-      macae-worker.vm.hostname "macae-worker"
+      macae_worker.vm.hostname = "macae-worker"
 
       #Network configing
       #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
       #      in the future this will be removed
-      macae-worker.vm.network "private_network", ip: "192.168.121.2", nic_type: "virtio"
-      macae-worker.vm.provision :shell, path: "macae-worker/network-config.sh"
+      macae_worker.vm.network :private_network, :ip => "192.168.12.3", :libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster" 
+      macae_worker.vm.provision :shell, path: "macae-worker/network-config.sh"
 
       #VM configing
-      macae-worker.vm.provision :shell, path: "macae-worker/bootstrap.sh"
+      macae_worker.vm.provision :shell, path: "macae-worker/bootstrap.sh"
 
-  end
+   end
 
+   #campos-worker configs
+   config.vm.define "campos-worker" do |campos_worker|
+
+      #Setting hostname
+      campos_worker.vm.hostname = "campos-worker"
+
+      #Network configing
+      #NOTE: the network-config.sh is necessary because the vagrant not setting the ip to centos
+      #      in the future this will be removed
+      campos_worker.vm.network :private_network, :ip => "192.168.12.4", :libvirt__dhcp_start => "192.168.12.100", :libvirt__network_name => "cluster"
+      campos_worker.vm.provision :shell, path: "campos-worker/network-config.sh"
+
+
+      #VM configing
+      campos_worker.vm.provision :shell, path: "campos-worker/bootstrap.sh"
+
+   end
 
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false

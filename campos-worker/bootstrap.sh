@@ -22,7 +22,7 @@ while !  (scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  -i /v
 done
 
 cluster_token=$(<cluster.token)
-log=$((docker swarm join --advertise-addr 192.168.12.3 --token $cluster_token 192.168.12.2:2377) 2>&1 1>/dev/null)
+log=$((docker swarm join --advertise-addr 192.168.12.4 --token $cluster_token 192.168.12.2:2377) 2>&1 1>/dev/null)
 
 if [[ -z $log ]] ; then
   echo Joining to the cluster
