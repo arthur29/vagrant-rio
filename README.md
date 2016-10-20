@@ -1,11 +1,15 @@
 # vagrant-rio
 
 ##Pre-requisites
-  1. Install nfs-server to syncronizing the swarm.
-  2. Install rubygem-ruby-libvirt libvirt-devel libxslt-devel libxml2-devel ruby-devel vagrant-libvirt
-  3. > gem install ruby-libvirt -v '0.7.0'
-  4. > gem install nokogiri
-  5. Add nfs to sudo
+  1. Install rubygem-ruby-libvirt libvirt-devel libxslt-devel libxml2-devel ruby-devel vagrant-libvirt
+  2. Install ruby-libvirt
+  >  gem install ruby-libvirt -v '0.7.0'
+  3. Install nokogiri to
+  > gem install nokogiri
+  
+###NFS still not implemented
+
+  4. Add nfs to sudo
 
 	> Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
 
