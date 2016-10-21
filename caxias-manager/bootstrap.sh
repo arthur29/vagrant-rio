@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-log=$((docker swarm init --advertise-addr 192.168.121.2:2377 --listen-addr 192.168.121.2:2377 --force-new-cluster) 2>&1 1>/dev/null)
+log=$((docker swarm init --advertise-addr 192.168.121.2:2377 --listen-addr 192.168.121.2:2377) 2>&1 1>/dev/null)
 if [[ -z $log ]] ; then
    echo Initializing the cluster
 else
