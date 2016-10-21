@@ -1,3 +1,2 @@
 ssh-key*
-.vagrant
-.vagrant/*
+.v*
