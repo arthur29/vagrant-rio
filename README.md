@@ -6,10 +6,11 @@
   >  gem install ruby-libvirt -v '0.7.0'
   3. Install nokogiri to
   > gem install nokogiri
+  4. Create ssh key named ssh-key in the vagrant folder
   
 ###NFS still not implemented
 
-  4. Add nfs to sudo
+  5. Add nfs to sudo
 
 	> Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
 
@@ -22,3 +23,8 @@
   > Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /bin/sed -r -e * d -ibak /tmp/exports
 
   > %vagrant ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_NFSD_CHECK, VAGRANT_NFSD_START, VAGRANT_NFSD_APPLY, VAGRANT_EXPORTS_REMOVE
+
+###Start other machines
+
+  macae-worker and campos-worker do not start with "vagrant up" so if your machine have potential initialize it.
+ 

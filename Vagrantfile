@@ -50,7 +50,7 @@ Vagrant.configure(2) do |config|
    end
 
    #macae-worker configs
-   config.vm.define "macae-worker" do |macae_worker|
+   config.vm.define "macae-worker", autostart: false do |macae_worker|
 
       #Setting hostname
       macae_worker.vm.hostname = "macae-worker"
@@ -67,7 +67,7 @@ Vagrant.configure(2) do |config|
    end
 
    #campos-worker configs
-   config.vm.define "campos-worker" do |campos_worker|
+   config.vm.define "campos-worker", autostart: false do |campos_worker|
 
       #Setting hostname
       campos_worker.vm.hostname = "campos-worker"
