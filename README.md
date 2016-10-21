@@ -14,7 +14,7 @@
   
 ###NFS still not implemented
 
-  5. Add nfs to sudo
+  Add nfs to sudo
 
 	> Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
 
