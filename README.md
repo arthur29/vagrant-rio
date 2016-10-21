@@ -6,11 +6,15 @@
 
   >  gem install ruby-libvirt -v '0.7.0'
 
-  3. Install nokogiri to
+  3. Install nokogiri
 
   > gem install nokogiri
 
-  4. Create ssh key named ssh-key in the vagrant folder
+  4. Install vagrant-libvirt plugin
+
+  > vagrant plugin install vagrant-libvirt
+
+  5. Create ssh key named ssh-key in the vagrant folder
   
 ###NFS still not implemented
 
