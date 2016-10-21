@@ -31,4 +31,8 @@
 ###Start other machines
 
   macae-worker and campos-worker do not start with "vagrant up" so if your machine have potential initialize it.
- 
+  To start them type:
+
+  > vagrant up macae-worker
+
+  > vagrant up campos-worker 
