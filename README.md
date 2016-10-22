@@ -40,3 +40,7 @@
   > vagrant up macae-worker
 
   > vagrant up campos-worker 
+
+### BUG
+
+I couldn't do an network on virt without DHCP, so I created a big sub network to decrease the probabily of ip coincidence.
