@@ -14,7 +14,7 @@
 
   > vagrant plugin install vagrant-libvirt
 
-  5. Create ssh key named ssh-key in the vagrant folder
+  5. Run make to prepare the enviroment
   
 ###NFS still not implemented
 

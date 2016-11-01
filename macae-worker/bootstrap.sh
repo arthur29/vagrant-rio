@@ -2,12 +2,8 @@
 
 cd /vagrant/macae-worker
 
-#old_modification=$(stat -c %Y ../cluster.token)
+cat /vagrant/.ssh/ssh-key.pub >> /root/.ssh/authorized_keys
 
-#last_modification=$(stat -c %Y ../cluster.token)
-#while [ "$last_modification" -e "$old_modification" ]; do
-#   last_modification=$(stat -c %Y ../cluster.token)
-#done
 cd ../
 
 #chown vagrant:vagrant /vagrant/cluster.token
@@ -17,7 +13,7 @@ done
 while [ "echo $(echo quit | telnet 192.168.121.2 22 2>/dev/null | grep Connected)" = "" ] ; do
  sleep 10s
 done
-while !  (scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  -i /vagrant/ssh-key vagrant@192.168.121.2:/vagrant/cluster.token /vagrant/cluster.token &>/dev/null); do
+while !  (scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  -i /vagrant/.ssh/ssh-key vagrant@192.168.121.2:/vagrant/cluster.token /vagrant/cluster.token &>/dev/null); do
  sleep 10s
 done
 

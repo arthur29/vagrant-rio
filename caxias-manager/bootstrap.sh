@@ -10,5 +10,5 @@ fi
 swarm_init_command=$(docker swarm join-token worker)
 cluster_token=$(echo $swarm_init_command | cut -d ' ' -f 17)
 echo $cluster_token > /vagrant/cluster.token
-cat /vagrant/ssh-key.pub >> /home/vagrant/.ssh/authorized_keys
+cat /vagrant/.ssh/ssh-key.pub >> /home/vagrant/.ssh/authorized_keys
 chown vagrant:vagrant /vagrant/cluster.token
