@@ -1,7 +1,7 @@
 # vagrant-rio
 
 ##Pre-requisites
-  1. Install rubygem-ruby-libvirt libvirt-devel libxslt-devel libxml2-devel ruby-devel vagrant-libvirt
+  1. Install redhat-rpm-config rubygem-ruby-libvirt libvirt-devel libxslt-devel libxml2-devel ruby-devel vagrant-libvirt
   2. Install ruby-libvirt
 
   >  gem install ruby-libvirt -v '0.7.0'
@@ -18,7 +18,7 @@
   
 ###NFS still not implemented
 
-  Add nfs to sudo
+  Add nfs to sudo in the sudoers file
 
   > Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
 
