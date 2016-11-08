@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
 
   #Virt config
   config.vm.provider :libvirt do |libvirt|
-     libvirt.storage_pool_name = "images"
+     libvirt.storage_pool_name = "<STORAGE_NAME>"
      libvirt.memory = 1024
      libvirt.cpus = 1
      libvirt.storage :file, :size => '10G', :format => 'qcow2'
