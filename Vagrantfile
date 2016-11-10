@@ -98,7 +98,7 @@ Vagrant.configure(2) do |config|
 
 
       #VM configing
-      #fundao_storage.vm.provision :shell, path: "fundao-storage/bootstrap.sh"
+      fundao_storage.vm.provision :shell, path: "fundao-storage/bootstrap.sh"
 
    end
 
