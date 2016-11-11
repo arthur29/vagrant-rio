@@ -1,6 +1,6 @@
 virt-storage=default
 default:
-	rm -r .ssh
+	if [ -d ".ssh" ]; then rm -r .ssh; fi
 	mkdir .ssh
 	ssh-keygen -t rsa -f .ssh/ssh-key -N ""
 	sed -i "s/<STORAGE_NAME>/$(virt-storage)/g" Vagrantfile
