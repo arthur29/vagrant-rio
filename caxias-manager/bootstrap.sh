@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+yum install -y ansible
+
 log=$((docker swarm init --advertise-addr 192.168.121.2:2377 --listen-addr 192.168.121.2:2377) 2>&1 1>/dev/null)
 if [[ -z $log ]] ; then
    echo Initializing the cluster
