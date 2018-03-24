@@ -1,6 +1,6 @@
 # vagrant-rio
 
-##Pre-requisites
+## Pre-requisites
   1. Install redhat-rpm-config rubygem-ruby-libvirt libvirt-devel libxslt-devel libxml2-devel ruby-devel vagrant-libvirt
   2. Install ruby-libvirt
 
@@ -16,7 +16,7 @@
 
   5. Run make to prepare the enviroment
   
-###NFS still not implemented
+### NFS still not implemented
 
   Add nfs to sudo in the sudoers file
 
@@ -32,7 +32,7 @@
 
   > %vagrant ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_NFSD_CHECK, VAGRANT_NFSD_START, VAGRANT_NFSD_APPLY, VAGRANT_EXPORTS_REMOVE
 
-###Start other machines
+### Start other machines
 
   macae-worker and campos-worker do not start with "vagrant up" so if your machine have potential initialize it.
   To start them type:
